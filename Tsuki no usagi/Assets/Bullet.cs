@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         Destroy(gameObject, life);
+        Debug.Log("Hi");
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -16,7 +17,9 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.layer != 8)
         {
             Destroy(collision.gameObject);
+            Debug.Log("Hi");
         }
         Destroy(gameObject);
+        Debug.Log("Hi");
     }
 }
