@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class CatAI : MonoBehaviour
 {
@@ -9,24 +10,47 @@ public class CatAI : MonoBehaviour
     public float visionDistance;
 
     public bool zodiacSpotted = false;
+    public bool pigTakeOver = false;
+
+    public GameObject cat;
+    //public MeshRenderer meshRenderer;
     public Transform player;
     public Transform pig; // This is lazy but we have no choice T_T
 
+    private PigAI pigAI;
+
+    private void Start()
+    {
+        pigAI = GetComponent<PigAI>();
+        //meshRenderer = GetComponent<MeshRenderer>();
+        cat = GameObject.Find("Cat");
+    }
+
     private void Update()
     {
-        // Check if a zodiac animal is within vision
-        //if (Vector3.Distance(transform.position, pig.position) <= visionDistance)
-        //{
-        //    zodiacSpotted = true;
-        //}
-
-        //if (zodiacSpotted)
-        //{
-        //    transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
-        //}
-        if (Vector3.Distance(transform.position, player.position) < minPlayerDistance)
+        if (!pigTakeOver)
         {
-            transform.position = Vector3.MoveTowards(transform.position, player.position, -speed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, pig.position) <= 1)
+            {
+                pigTakeOver = true;
+            }
+            else if (Vector3.Distance(transform.position, pig.position) <= visionDistance) ChaseZodiac();
+
+            else if (Vector3.Distance(transform.position, player.position) < minPlayerDistance)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+            }
         }
+        else
+        {
+            //pigAI.takeOver = true;
+            cat.GetComponent<MeshRenderer>().enabled = false;
+        }
+        
+    }
+
+    private void ChaseZodiac()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, pig.position, speed * Time.deltaTime);
     }
 }
