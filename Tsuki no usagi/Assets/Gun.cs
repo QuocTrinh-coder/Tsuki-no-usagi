@@ -16,9 +16,18 @@ public class Gun : MonoBehaviour
     void Update()
     {
         // Rotate orientation
-        float horizontalSpeed = Input.GetAxis("Mouse X") * -rotationSpeed;
+        //float horizontalSpeed = Input.GetAxis("Mouse X") * rotationSpeed;
         float verticalSpeed = Input.GetAxis("Mouse Y") * -rotationSpeed;
-        transform.Rotate(verticalSpeed, horizontalSpeed, 0);
+        transform.Rotate(verticalSpeed, 0, 0);
+
+        if (transform.position.y < -75)
+        {
+            transform.position = new Vector3(transform.position.x, -75, transform.position.z);
+        }
+        else if (transform.position.y > 0)
+        {
+            transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+        }
 
         if (canBulletSpawn && Input.GetKey(KeyCode.Mouse1))
         {
