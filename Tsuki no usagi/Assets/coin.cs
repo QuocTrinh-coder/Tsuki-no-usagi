@@ -23,7 +23,7 @@ public class coin : MonoBehaviour
     }
     private void OnTriggerEnter( Collider other)
     {
-        if (other.name == "thirdpersonmovement")
+        if (other.name == "Player")
         {
             other.GetComponent<Point_system>().points++;
             Destroy(gameObject); // this destroy thing
