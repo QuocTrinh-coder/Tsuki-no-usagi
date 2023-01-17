@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         Destroy(gameObject, life);
-        Debug.Log("Hi");
+       
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
             {
                 Destroy(collision.gameObject);
             }
-            Destroy(gameObject);
+         
         }        
     }
 }
