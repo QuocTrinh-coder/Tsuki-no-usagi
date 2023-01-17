@@ -126,4 +126,12 @@ public class PlayerMovement : MonoBehaviour
     {
         readyToJump = true;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 6)
+        {
+            Debug.Log("GG");
+        }
+    }
 }
