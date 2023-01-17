@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,35 +7,44 @@ using UnityEngine.EventSystems;
 public class PigAI : MonoBehaviour
 {
     public float speed;
-    public bool takeOver;
+    public bool chasePlayer;
     public float waitTime;
     public float minPlayerDistance;
-    public Transform player;
 
     private bool waitDone = true;
 
     private void Start()
     {
-        takeOver = false;
+        chasePlayer = false;
         EventTrigger trigger = GetComponent<EventTrigger>();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (takeOver && waitDone)
+        // check if collided
+        //if (chasePlayer && waitDone)
+        if(chasePlayer)
         {
-            Debug.Log("HI");
-            waitDone = false;
-            if (Vector3.Distance(transform.position, player.position) > minPlayerDistance)
-            {
-                Charge();
-            }
-            else
-            {
-                //Stomp();
-            }
+            Debug.Log("Move pig");
+            //waitDone = false;
+
+            Charge();
+            /* if (Vector3.Distance(transform.position, player.position) > minPlayerDistance)
+             {
+                 Charge();
+             }
+             else
+             {
+                 //Stomp();
+             }*/
             StartCoroutine(Wait());
+
+            // if jump, escape
+            if (Input.GetKey(KeyCode.Space))
+            {
+                chasePlayer = false;
+            }
         }
     }
 
@@ -44,17 +54,19 @@ public class PigAI : MonoBehaviour
         waitDone = true;
     }
 
+    // if collide into player, then chase player
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Cat")
-        {
-            takeOver = true;
-        }
+        chasePlayer = true;
+        Debug.Log("Hit Pig");
     }
 
+    // follow player
     private void Charge()
     {
-        transform.position = Vector3.MoveTowards(transform.position, player.position, 5f * speed * Time.deltaTime);
+        Transform player = (GameObject.Find("Player")).GetComponent<Transform>();
+        transform.position = Vector3.MoveTowards(transform.position, player.position, .01f);
+        //transform.position = Vector3.MoveTowards(transform.position, player.position, 5f * speed * Time.deltaTime);
     }
 
     private void Stomp()
