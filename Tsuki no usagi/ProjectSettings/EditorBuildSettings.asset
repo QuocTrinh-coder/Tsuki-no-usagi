@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Tsuki no usagi 1.unity
+    guid: 14265f4e4a186734eb58db10b7bb874d
   m_configObjects: {}
