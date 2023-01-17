@@ -38,6 +38,7 @@ public class Gun : MonoBehaviour
         {
             canBulletSpawn = false;
             var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            bullet.transform.rotation = new Quaternion(bullet.transform.rotation.x * -1, bullet.transform.rotation.y, bullet.transform.rotation.z, bullet.transform.rotation.z);
             bullet.GetComponent<Rigidbody>().velocity = bulletSpawnPoint.forward * bulletSpeed;
             Invoke(nameof(ResetBulletSpawn), shootTime);
         }
