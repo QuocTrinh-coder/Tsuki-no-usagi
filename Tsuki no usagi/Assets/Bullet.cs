@@ -14,12 +14,13 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer != 8)
+        if (collision.gameObject.tag != "Player")
         {
-            Destroy(collision.gameObject);
-            Debug.Log("Hi");
-        }
-        Destroy(gameObject);
-        Debug.Log("Hi");
+            if (collision.gameObject.layer != 8)
+            {
+                Destroy(collision.gameObject);
+            }
+            Destroy(gameObject);
+        }        
     }
 }

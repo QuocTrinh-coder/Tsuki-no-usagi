@@ -127,5 +127,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1482e14f68cee42a59493d565532e778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 1
   life: 3
+  bullet: {fileID: 2665816820326032971}
