@@ -18,16 +18,21 @@ public class Gun : MonoBehaviour
         // Rotate orientation
         //float horizontalSpeed = Input.GetAxis("Mouse X") * rotationSpeed;
         float verticalSpeed = Input.GetAxis("Mouse Y") * -rotationSpeed;
+
+        if (Mathf.Abs(verticalSpeed) > 75)
+        {
+            verticalSpeed = 0;
+        }
         transform.Rotate(verticalSpeed, 0, 0);
 
-        if (transform.position.y < -75)
-        {
-            transform.position = new Vector3(transform.position.x, -75, transform.position.z);
-        }
-        else if (transform.position.y > 0)
-        {
-            transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-        }
+        //if (transform.rotation.x < -75)
+        //{
+        //    transform.rotation = new Quaternion(-75, transform.rotation.y, transform.rotation.z, transform.rotation.w);
+        //}
+        //else if (transform.rotation.x > 0)
+        //{
+        //    transform.rotation = new Quaternion(0, transform.rotation.y, transform.rotation.z, transform.rotation.w);
+        //}
 
         if (canBulletSpawn && Input.GetKey(KeyCode.Mouse1))
         {
